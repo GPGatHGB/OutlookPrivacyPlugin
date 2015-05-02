@@ -1409,29 +1409,57 @@ namespace OutlookPrivacyPlugin
 
 			try
 			{
+                verificationBar bar = null;
+                foreach (Microsoft.Office.Tools.Outlook.IFormRegion formRegion in Globals.FormRegions)
+                {
+                    if (formRegion is verificationBar)
+                    {
+                        bar = (verificationBar)formRegion;
+                    }
+                }
+
 				if (Crypto.Verify(_encoding.GetBytes(mail)))
 				{
 					Context = Crypto.Context;
 
+                    // Show Popup if verificationBar doesn't work properly
+                    if (bar != null)
+                    {
+                        bar.status_valid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Valid Signature!", "Signature Validation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    /*
 					var message = "** Valid signature from \"" + Context.SignedByUserId +
 						"\" with KeyId " + Context.SignedByKeyId + ".\n\n";
 
 					if (mailType == Outlook.OlBodyFormat.olFormatPlain)
 					{
+                       
 						mailItem.Body = message + mailItem.Body;
 					}
+                     */
 				}
 				else
 				{
-					Context = Crypto.Context;
-
-					var message = "** Invalid signature from \"" + Context.SignedByUserId +
+                    Context = Crypto.Context;
+                    if (bar != null)
+                    {
+                        bar.status_invalid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid Signature!", "Signature Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+					/*var message = "** Invalid signature from \"" + Context.SignedByUserId +
 						"\" with KeyId " + Context.SignedByKeyId + ".\n\n";
 
 					if (mailType == Outlook.OlBodyFormat.olFormatPlain)
 					{
 						mailItem.Body = message + mailItem.Body;
-					}
+					}*/
 				}
 			}
 			catch (PublicKeyNotFoundException)

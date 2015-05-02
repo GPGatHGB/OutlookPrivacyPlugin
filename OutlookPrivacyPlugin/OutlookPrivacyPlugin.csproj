@@ -190,6 +190,12 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Attachment.cs" />
+    <Compile Include="verificationBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="verificationBar.Designer.cs">
+      <DependentUpon>verificationBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="GnuKey.cs" />
     <Compile Include="GnuPGCommandBar.cs" />
     <Compile Include="GnuPGRibbon.cs">
@@ -220,6 +226,9 @@
     </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="verificationBar.resx">
+      <DependentUpon>verificationBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Passphrase.resx">
       <DependentUpon>Passphrase.cs</DependentUpon>
@@ -292,10 +301,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>OutlookPrivacyPlugin_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>C59300CE714F8A15418DA6E37CECE19CB5A50786</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3E798D21E5F2A8BAC9A4A82AA600EE01BDC940DC</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
