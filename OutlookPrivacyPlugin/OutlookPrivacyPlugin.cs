@@ -51,9 +51,9 @@ namespace OutlookPrivacyPlugin
 
 		// PGP Headers
 		// http://www.ietf.org/rfc/rfc4880.txt page 54
-		const string _pgpSignedHeader = "BEGIN PGP SIGNED MESSAGE";
-		const string _pgpEncryptedHeader = "BEGIN PGP MESSAGE";
-		const string _pgpHeaderPattern = "BEGIN PGP( SIGNED)? MESSAGE";
+        const string _pgpSignedHeader = "BEGIN PGP SIGNED MESSAGE";
+        const string _pgpEncryptedHeader = "BEGIN PGP MESSAGE";
+        const string _pgpHeaderPattern = "BEGIN PGP( SIGNED)? MESSAGE";
 
 		private void OutlookGnuPG_Startup(object sender, EventArgs e)
 		{
@@ -1393,7 +1393,10 @@ namespace OutlookPrivacyPlugin
 			string mail = mailItem.Body;
 			Outlook.OlBodyFormat mailType = mailItem.BodyFormat;
 
-			if (Regex.IsMatch(mailItem.Body, _pgpSignedHeader) == false)
+            Match match= Regex.Match(mailItem.Body, _pgpSignedHeader);
+            string unsigned_part = null;
+
+			if (match == null)
 			{
 				MessageBox.Show(
 					"Outlook Privacy cannot help here.",
@@ -1403,21 +1406,28 @@ namespace OutlookPrivacyPlugin
 
 				return;
 			}
+            // is the content partial or completely signed ?
+            else if(!mail.Substring(0, 10).Equals("-----BEGIN"))
+            {
+                // Mail partial signed
+                unsigned_part = Regex.Match(mail, "((.)\n*)*?(?=-----BEGIN PGP SIGNED MESSAGE)").ToString();
+                mail = Regex.Match(mail, "(-){5}BEGIN PGP( SIGNED)? MESSAGE((.)*\n)*").ToString();
+            }
 
 			var Context = new CryptoContext(Passphrase);
 			var Crypto = new PgpCrypto(Context);
-
-			try
-			{
-                verificationBar bar = null;
-                foreach (Microsoft.Office.Tools.Outlook.IFormRegion formRegion in Globals.FormRegions)
+            
+            verificationBar bar = null;
+            foreach (Microsoft.Office.Tools.Outlook.IFormRegion formRegion in Globals.FormRegions)
+            {
+                if (formRegion is verificationBar)
                 {
-                    if (formRegion is verificationBar)
-                    {
-                        bar = (verificationBar)formRegion;
-                    }
+                    bar = (verificationBar)formRegion;
                 }
-
+            }
+			
+            try
+			{
 				if (Crypto.Verify(_encoding.GetBytes(mail)))
 				{
 					Context = Crypto.Context;
@@ -1425,7 +1435,15 @@ namespace OutlookPrivacyPlugin
                     // Show Popup if verificationBar doesn't work properly
                     if (bar != null)
                     {
-                        bar.status_valid();
+                        if (unsigned_part == null)
+                        {
+                            bar.status_valid(Context.SignedByUserId, Context.SignedByKeyId);
+                        }
+                        else
+                        {
+                            bar.status_partial(Context.SignedByUserId, Context.SignedByKeyId);
+                            //mailItem.Body = unsigned_part + "\n\n-----Signed Message begins here-----\n" + mail;
+                        }
                     }
                     else
                     {
@@ -1447,7 +1465,7 @@ namespace OutlookPrivacyPlugin
                     Context = Crypto.Context;
                     if (bar != null)
                     {
-                        bar.status_invalid();
+                        bar.status_invalid(Context.SignedByUserId, Context.SignedByKeyId);
                     }
                     else
                     {
@@ -1466,12 +1484,21 @@ namespace OutlookPrivacyPlugin
 			{
 				Context = Crypto.Context;
 
-				const string message = "** Unable to verify signature, missing public key.\n\n";
+                if (bar != null)
+                {
+                    bar.status_unable("Missing Public Key");
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Signature!", "Signature Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+				/*const string message = "** Unable to verify signature, missing public key.\n\n";
 
 				if (mailType == Outlook.OlBodyFormat.olFormatPlain)
 				{
 					mailItem.Body = message + mailItem.Body;
-				}
+				}*/
 			}
 			catch (Exception ex)
 			{

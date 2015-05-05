@@ -43,7 +43,7 @@
             this.status.Enabled = false;
             this.status.Location = new System.Drawing.Point(3, 3);
             this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(332, 23);
+            this.status.Size = new System.Drawing.Size(641, 23);
             this.status.TabIndex = 0;
             this.status.Text = "Status";
             this.status.UseVisualStyleBackColor = false;
@@ -54,7 +54,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.status);
             this.Name = "verificationBar";
-            this.Size = new System.Drawing.Size(338, 31);
+            this.Size = new System.Drawing.Size(713, 31);
             this.FormRegionShowing += new System.EventHandler(this.FormRegion1_FormRegionShowing);
             this.FormRegionClosed += new System.EventHandler(this.FormRegion1_FormRegionClosed);
             this.ResumeLayout(false);

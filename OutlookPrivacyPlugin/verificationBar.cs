@@ -40,23 +40,33 @@ namespace OutlookPrivacyPlugin
         {
         }
 
-        private void status_Click_1(object sender, EventArgs e)
+        public void status_valid(string userid, string keyid)
         {
-            this.status.BackColor = Color.Crimson;
-            this.status.Text = "verified";
-        }
-
-        public void status_valid()
-        {
-            status.Text = "Valid Signature!";
+            status.Text = "Valid Signature! User ID: "+userid+" Key ID: "+keyid;
             status.BackColor = Color.PaleGreen;
         }
 
-        public void status_invalid()
+        public void status_invalid(string userid, string keyid)
         {
-            this.Enabled = true;
-            status.Text = "Invalid Signature!";
+            status.Text = "Invalid Signature! User ID: "+userid+" Key ID: "+keyid;
             status.BackColor = Color.Red;
+        }
+
+        public void status_partial(string userid, string keyid)
+        {
+            status.Text = "Message Partially Signed! User ID: "+userid+" Key ID: "+keyid;
+            status.BackColor = Color.Yellow;
+        }
+
+        public void status_unable(string reason)
+        {
+            status.Text = "Unable to Verify! (" + reason + ")";
+            status.BackColor = Color.Red;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
