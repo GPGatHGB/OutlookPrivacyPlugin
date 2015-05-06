@@ -1171,6 +1171,9 @@ namespace OutlookPrivacyPlugin
 				}
 				else if (needToSign)
 				{
+                    // The mail item must not have more than 76 characters in one line!
+                    mail = ReduceLineCharacters(mail);
+
 					// Sign the plaintext mail if needed
 					mail = SignEmail(mail, GetSMTPAddress(mailItem));
 					if (mail == null)
@@ -1247,6 +1250,48 @@ namespace OutlookPrivacyPlugin
 			Cancel = false;
 			mailItem.Body = mail;
 		}
+
+        /// <summary>
+        /// This method converts an original mail into a format where lines are
+        /// not longer than 76 characters.
+        /// </summary>
+        /// <param name="mail">Typed mail</param>
+        /// <returns>Mail content with lines not longer than 76 characters</returns>
+        private string ReduceLineCharacters(string mail)
+        {
+            string[] mailLines = Regex.Split(mail,"\r\n");
+            StringBuilder builder = new StringBuilder();
+            for (int j = 0; j < mailLines.Length; j++)
+            {
+                if (mailLines[j].Length > 76)
+                {
+                    // a line has more than 76 characters
+                    int i = 75;
+                    int delimiter;
+
+                    // calculate where the last space in the mail is
+                    while (i >= 0 && !mailLines[j][i].Equals(' '))
+                    {
+                        i--;
+                    }
+
+                    // the line break will be either inserted on a space or
+                    // if a word is longer than 76 characters it will be cut.
+                    delimiter = (i>0) ? i+1 : 75;
+
+                    builder.Append(mailLines[j].Substring(0, delimiter));
+                    mailLines[j] = mailLines[j].Substring(delimiter);
+                    j--;
+                }
+                else
+                {
+                    // a line has less than or 76 characters
+                    builder.Append(mailLines[j]);
+                }
+                builder.AppendLine();
+            }
+            return builder.ToString();
+        }
 
 		private string SignEmail(string data, string key)
 		{

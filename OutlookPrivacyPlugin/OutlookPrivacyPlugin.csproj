@@ -251,6 +251,7 @@
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="oop.snk" />
+    <None Include="OutlookPrivacyPlugin_1_TemporaryKey.pfx" />
     <None Include="OutlookPrivacyPlugin_TemporaryKey.pfx" />
     <None Include="OutlookPrivacyPlugin_TemporaryKey.snk" />
     <None Include="packages.config" />
@@ -301,11 +302,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>OutlookPrivacyPlugin_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3E798D21E5F2A8BAC9A4A82AA600EE01BDC940DC</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D431DE3BB6DDBB4DD9F989B517877D454C0A4A59</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
