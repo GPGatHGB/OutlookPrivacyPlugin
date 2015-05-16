@@ -1441,17 +1441,34 @@ namespace OutlookPrivacyPlugin
             Match match= Regex.Match(mailItem.Body, _pgpSignedHeader);
             string unsigned_part = null;
 
+            verificationBar bar = null;
+            foreach (Microsoft.Office.Tools.Outlook.IFormRegion formRegion in Globals.FormRegions)
+            {
+                if (formRegion is verificationBar)
+                {
+                    bar = (verificationBar)formRegion;
+                }
+            }
+
 			if (match == null)
 			{
-				MessageBox.Show(
-					"Outlook Privacy cannot help here.",
-					"Mail is not signed",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
+                // Show Popup if verificationBar doesn't work properly
+                if (bar != null)
+                {
+                    bar.status_yellow("Outlook Privacy cannot help here. Mail is not signed.");
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Outlook Privacy cannot help here.",
+                        "Mail is not signed",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+                }
 
 				return;
 			}
-            // is the content partial or completely signed ?
+            // is the content partially or completely signed ?
             else if(!mail.Substring(0, 10).Equals("-----BEGIN"))
             {
                 // Mail partial signed
@@ -1461,15 +1478,6 @@ namespace OutlookPrivacyPlugin
 
 			var Context = new CryptoContext(Passphrase);
 			var Crypto = new PgpCrypto(Context);
-            
-            verificationBar bar = null;
-            foreach (Microsoft.Office.Tools.Outlook.IFormRegion formRegion in Globals.FormRegions)
-            {
-                if (formRegion is verificationBar)
-                {
-                    bar = (verificationBar)formRegion;
-                }
-            }
 			
             try
 			{
@@ -1780,33 +1788,43 @@ namespace OutlookPrivacyPlugin
 			var Context = new CryptoContext(Passphrase);
 			var Crypto = new PgpCrypto(Context);
 
+            verificationBar bar = null;
+            foreach (Microsoft.Office.Tools.Outlook.IFormRegion formRegion in Globals.FormRegions)
+            {
+                if (formRegion is verificationBar)
+                {
+                    bar = (verificationBar)formRegion;
+                }
+            }
+
 			try
 			{
 				var cleartext = Crypto.DecryptAndVerify(data, _settings.IgnoreIntegrityCheck);
-				Context = Crypto.Context;
-
-				// NOT USED YET.
+                Context = Crypto.Context;
 				
-				//DecryptAndVerifyHeaderMessage = "** ";
+				var message = "";
 
-				//if (Context.IsEncrypted)
-				//	DecryptAndVerifyHeaderMessage += "Message decrypted. ";
+                if (Context.IsEncrypted) {
+                    message += "Message decrypted. ";
 
-				//if (Context.IsSigned && Context.SignatureValidated)
-				//{
-				//	DecryptAndVerifyHeaderMessage += "Valid signature from \"" + Context.SignedByUserId +
-				//		"\" with KeyId " + Context.SignedByKeyId;
-				//}
-				//else if (Context.IsSigned)
-				//{
-				//	DecryptAndVerifyHeaderMessage += "Invalid signature from \"" + Context.SignedByUserId +
-				//		"\" with KeyId " + Context.SignedByKeyId + ".";
-				//}
-				//else
-				//	DecryptAndVerifyHeaderMessage += "Message was unsigned.";
+				    if (Context.IsSigned && Context.SignatureValidated)
+				    {
+                        message += "Valid Signature! User ID: " + Context.SignedByUserId +
+						    " Key ID: " + Context.SignedByKeyId;
+                        bar.status_green(message);
 
-				//DecryptAndVerifyHeaderMessage += "\n\n";
-
+				    }
+				    else if (Context.IsSigned)
+				    {
+                        message += "Invalid Signature! User ID: " + Context.SignedByUserId +
+						    " Key ID: " + Context.SignedByKeyId;
+                        bar.status_red(message);
+				    }
+                    else
+                    {
+                        bar.status_gray(message);
+                    }
+                }
 				outContext = Context;
 				return cleartext;
 			}
