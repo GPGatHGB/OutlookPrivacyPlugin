@@ -638,12 +638,22 @@ namespace OutlookPrivacyPlugin
 			}
 
 			// 2. Verify signature
+            verificationBar bar = null;
+            foreach (Microsoft.Office.Tools.Outlook.IFormRegion formRegion in Globals.FormRegions)
+            {
+                if (formRegion is verificationBar)
+                {
+                    bar = (verificationBar)formRegion;
+                }
+            }
 
 			if (sigMime != null)
 			{
 				Context = new CryptoContext(Passphrase);
 				var Crypto = new PgpCrypto(Context);
 				Outlook.OlBodyFormat mailType = mailItem.BodyFormat;
+
+                
 
 				try
 				{
@@ -675,29 +685,30 @@ namespace OutlookPrivacyPlugin
 
 					logger.Trace(clearsig);
 
-
 					if (Crypto.VerifyClear(_encoding.GetBytes(clearsig)))
 					{
 						Context = Crypto.Context;
 
-						var message = "** Valid signature from \"" + Context.SignedByUserId +
+						var message = "Valid signature from \"" + Context.SignedByUserId +
 							"\" with KeyId " + Context.SignedByKeyId + ".\n\n";
 
 						if (mailType == Outlook.OlBodyFormat.olFormatPlain)
 						{
-							mailItem.Body = message + mailItem.Body;
+                            bar.status_green(message);
+							//mailItem.Body = message + mailItem.Body;
 						}
 					}
 					else
 					{
 						Context = Crypto.Context;
 
-						var message = "** Invalid signature from \"" + Context.SignedByUserId +
+						var message = "Invalid signature from \"" + Context.SignedByUserId +
 							"\" with KeyId " + Context.SignedByKeyId + ".\n\n";
 
 						if (mailType == Outlook.OlBodyFormat.olFormatPlain)
 						{
-							mailItem.Body = message + mailItem.Body;
+                            bar.status_red(message);
+							//mailItem.Body = message + mailItem.Body;
 						}
 					}
 				}
@@ -707,11 +718,12 @@ namespace OutlookPrivacyPlugin
 
 					Context = Crypto.Context;
 
-					var message = "** Unable to verify signature, missing public key.\n\n";
+					var message = "Unable to verify signature, missing public key.\n\n";
 
 					if (mailType == Outlook.OlBodyFormat.olFormatPlain)
 					{
-						mailItem.Body = message + mailItem.Body;
+                        bar.status_red(message);
+						//mailItem.Body = message + mailItem.Body;
 					}
 				}
 				catch (Exception ex)
@@ -741,7 +753,7 @@ namespace OutlookPrivacyPlugin
 			SharpMessage msg = new SharpMessage(cleartext);
 			string body = mailItem.Body;
 
-			var DecryptAndVerifyHeaderMessage = "** ";
+			var DecryptAndVerifyHeaderMessage = "";
 
 			if (Context.IsEncrypted)
 				DecryptAndVerifyHeaderMessage += "Message decrypted. ";
@@ -766,7 +778,8 @@ namespace OutlookPrivacyPlugin
 
 			if (mailItem.BodyFormat == Outlook.OlBodyFormat.olFormatPlain)
 			{
-				mailItem.Body = DecryptAndVerifyHeaderMessage + msg.Body;
+                bar.status_red(DecryptAndVerifyHeaderMessage);
+				//mailItem.Body = DecryptAndVerifyHeaderMessage + msg.Body;
 			}
 			else if (mailItem.BodyFormat == Outlook.OlBodyFormat.olFormatHTML)
 			{
@@ -1525,11 +1538,11 @@ namespace OutlookPrivacyPlugin
                     {
                         if (unsigned_part == null)
                         {
-                            bar.status_valid(Context.SignedByUserId, Context.SignedByKeyId);
+                            bar.status_green("Valid Signature! User ID: " + Context.SignedByUserId + " Key ID: " + Context.SignedByKeyId);
                         }
                         else
                         {
-                            bar.status_partial(Context.SignedByUserId, Context.SignedByKeyId);
+                            bar.status_yellow("Message Partially Signed! User ID: " + Context.SignedByUserId + " Key ID: " + Context.SignedByKeyId);
                             //mailItem.Body = unsigned_part + "\n\n-----Signed Message begins here-----\n" + mail;
                         }
                     }
@@ -1553,7 +1566,7 @@ namespace OutlookPrivacyPlugin
                     Context = Crypto.Context;
                     if (bar != null)
                     {
-                        bar.status_invalid(Context.SignedByUserId, Context.SignedByKeyId);
+                        bar.status_red("Invalid Signature! User ID: " + Context.SignedByUserId + " Key ID: " + Context.SignedByKeyId);
                     }
                     else
                     {
@@ -1574,7 +1587,7 @@ namespace OutlookPrivacyPlugin
 
                 if (bar != null)
                 {
-                    bar.status_unable("Missing Public Key");
+                    bar.status_red("Unable to Verify! (Missing Public Key)");
                 }
                 else
                 {

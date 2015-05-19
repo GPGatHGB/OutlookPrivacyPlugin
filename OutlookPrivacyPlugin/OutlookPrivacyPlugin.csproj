@@ -305,7 +305,7 @@
     <ManifestKeyFile>OutlookPrivacyPlugin_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>D431DE3BB6DDBB4DD9F989B517877D454C0A4A59</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>70D1B0A0D1300B759FE31A06F1C98F604E61DCD8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

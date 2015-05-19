@@ -41,24 +41,6 @@ namespace OutlookPrivacyPlugin
         }
 
         #region different_statuses
-        public void status_valid(string userid, string keyid)
-        {
-            status.Text = "Valid Signature! User ID: "+userid+" Key ID: "+keyid;
-            status.BackColor = Color.PaleGreen;
-        }
-
-        public void status_invalid(string userid, string keyid)
-        {
-            status.Text = "Invalid Signature! User ID: "+userid+" Key ID: "+keyid;
-            status.BackColor = Color.Tomato;
-        }
-
-        public void status_partial(string userid, string keyid)
-        {
-            status.Text = "Message Partially Signed! User ID: "+userid+" Key ID: "+keyid;
-            status.BackColor = Color.Yellow;
-        }
-
         public void status_green(string text)
         {
             status.Text = text;
@@ -83,16 +65,7 @@ namespace OutlookPrivacyPlugin
             status.BackColor = Color.LightGray;
         }
 
-        public void status_unable(string reason)
-        {
-            status.Text = "Unable to Verify! (" + reason + ")";
-            status.BackColor = Color.Tomato;
-        }
         #endregion
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
