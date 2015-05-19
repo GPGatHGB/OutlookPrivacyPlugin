@@ -505,6 +505,12 @@ namespace OutlookPrivacyPlugin
 				{
 					ribbon.VerifyButton.Enabled = (match.Value == _pgpSignedHeader);
 					ribbon.DecryptButton.Enabled = (match.Value == _pgpEncryptedHeader);
+					
+					// if decryption is diselected, check the attachments, if only attachments are encrypted
+                    if (ribbon.DecryptButton.Enabled == false)
+                    {
+                        ribbon.DecryptButton.Enabled = checkIfAttachmentsEncrypted(mailItem);
+                    }
 				}
 			}
 
@@ -1067,9 +1073,11 @@ namespace OutlookPrivacyPlugin
 			Outlook.OlBodyFormat mailType = mailItem.BodyFormat;
 			bool needToEncrypt = currentRibbon.EncryptButton.Checked;
 			bool needToSign = currentRibbon.SignButton.Checked;
+			bool onlyAttachments = currentRibbon.OnlyAttachmentsButton.Checked;
 
             currentRibbon.EncryptButton.Checked = false;
             currentRibbon.SignButton.Checked = false;
+            currentRibbon.OnlyAttachmentsButton.Checked = false;
 
 			// Early out when we don't need to sign/encrypt
 			if (!needToEncrypt && !needToSign)
@@ -1138,7 +1146,12 @@ namespace OutlookPrivacyPlugin
 				// Sign and encrypt the plaintext mail
 				if ((needToSign) && (needToEncrypt))
 				{
-					mail = SignAndEncryptEmail(mail, GetSMTPAddress(mailItem), recipients);
+					// Only sign encrypt attachments when option is set
+                    if (!onlyAttachments)
+                    {
+                        mail = SignAndEncryptEmail(mail, GetSMTPAddress(mailItem), recipients);
+                    }
+					
 					if (mail == null)
 						return;
 
@@ -1174,15 +1187,37 @@ namespace OutlookPrivacyPlugin
                     // The mail item must not have more than 76 characters in one line!
                     mail = ReduceLineCharacters(mail);
 
-					// Sign the plaintext mail if needed
-					mail = SignEmail(mail, GetSMTPAddress(mailItem));
-					if (mail == null)
-						return;
+					// if onlyAttachments is set, inform user signing only attachments isn't possible
+                    if (!onlyAttachments)
+                    {
+                        // Sign the plaintext mail if needed
+                        mail = SignEmail(mail, GetSMTPAddress(mailItem));
+
+                        if (mail == null)
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "OPP can't sign only attachments!\nAlso select encrypt or deselect sign!",
+                            "Outlook Privacy Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                        Cancel = true;
+
+                        return;
+                    }
 				}
 				else if (needToEncrypt)
 				{
-					// Encrypt the plaintext mail if needed
-					mail = EncryptEmail(mail, recipients);
+					// Only encrypt attachments when option is set
+                    if (!onlyAttachments)
+                    {
+                        // Encrypt the plaintext mail if needed
+                        mail = EncryptEmail(mail, recipients);
+                    }
+					
 					if (mail == null)
 						return;
 
@@ -1592,6 +1627,11 @@ namespace OutlookPrivacyPlugin
 
 		internal void DecryptEmail(Outlook.MailItem mailItem)
 		{
+			var encryptedBody = Regex.IsMatch(mailItem.Body, _pgpEncryptedHeader);
+            var encryptedAttachments = checkIfAttachmentsEncrypted(mailItem);
+
+            CryptoContext Context;
+
 			if (Regex.IsMatch(mailItem.Body, _pgpEncryptedHeader) == false)
 			{
 				MessageBox.Show(
@@ -1604,44 +1644,49 @@ namespace OutlookPrivacyPlugin
 
 			// Sometimes messages could contain multiple message blocks.  In that case just use the 
 			// very first one.
+			
+			if (encryptedBody) {
+				string firstPgpBlock = mailItem.Body;
+				int endMessagePosition = firstPgpBlock.IndexOf("-----END PGP MESSAGE-----") + "-----END PGP MESSAGE-----".Length;
+				if (endMessagePosition != -1)
+					firstPgpBlock = firstPgpBlock.Substring(0, endMessagePosition);
 
-			string firstPgpBlock = mailItem.Body;
-			int endMessagePosition = firstPgpBlock.IndexOf("-----END PGP MESSAGE-----") + "-----END PGP MESSAGE-----".Length;
-			if (endMessagePosition != -1)
-				firstPgpBlock = firstPgpBlock.Substring(0, endMessagePosition);
-
-			string charset = null;
-			try
-			{
-				charset = Regex.Match(firstPgpBlock, @"Charset:\s+([^\s\r\n]+)").Groups[1].Value;
-			}
-			catch
-			{
-			}
-
-			// Set default encoding if charset was missing from 
-			// message.
-			if (string.IsNullOrWhiteSpace(charset))
-				charset = "ISO-8859-1";
-
-			var encoding = Encoding.GetEncoding(charset);
-
-			CryptoContext Context;
-			byte[] cleardata = DecryptAndVerify(mailItem.To, ASCIIEncoding.ASCII.GetBytes(firstPgpBlock), out Context);
-			if (cleardata != null)
-			{
-				mailItem.Body = DecryptAndVerifyHeaderMessage + encoding.GetString(cleardata);
-
-				if (mailItem.BodyFormat == Outlook.OlBodyFormat.olFormatHTML)
+				string charset = null;
+				try
 				{
-					// Don't HMTL encode or we will encode emails already in HTML format.
-					// Office has a safe html module they use to prevent security issues.
-					// Not encoding here should be no worse then reading a standard HTML
-					// email.
-					var html = DecryptAndVerifyHeaderMessage.Replace("<", "&lt;").Replace(">", "&gt;") + encoding.GetString(cleardata);
-					html = html.Replace("\n", "<br/>");
-					mailItem.HTMLBody = "<html><body>" + html + "</body></html>";
+					charset = Regex.Match(firstPgpBlock, @"Charset:\s+([^\s\r\n]+)").Groups[1].Value;
 				}
+				catch
+				{
+				}
+
+				// Set default encoding if charset was missing from 
+				// message.
+				if (string.IsNullOrWhiteSpace(charset))
+					charset = "ISO-8859-1";
+
+				var encoding = Encoding.GetEncoding(charset);
+
+				
+				byte[] cleardata = DecryptAndVerify(mailItem.To, ASCIIEncoding.ASCII.GetBytes(firstPgpBlock), out Context);
+				if (cleardata != null)
+				{
+					mailItem.Body = DecryptAndVerifyHeaderMessage + encoding.GetString(cleardata);
+
+					if (mailItem.BodyFormat == Outlook.OlBodyFormat.olFormatHTML)
+					{
+						// Don't HMTL encode or we will encode emails already in HTML format.
+						// Office has a safe html module they use to prevent security issues.
+						// Not encoding here should be no worse then reading a standard HTML
+						// email.
+						var html = DecryptAndVerifyHeaderMessage.Replace("<", "&lt;").Replace(">", "&gt;") + encoding.GetString(cleardata);
+						html = html.Replace("\n", "<br/>");
+						mailItem.HTMLBody = "<html><body>" + html + "</body></html>";
+					}
+				}
+			}
+			
+			if (encryptedAttachments) {
 
 				// Decrypt all attachments
 				List<Microsoft.Office.Interop.Outlook.Attachment> mailAttachments = new List<Outlook.Attachment>();
@@ -1741,19 +1786,39 @@ namespace OutlookPrivacyPlugin
 							// Assume attachment wasn't encrypted
 						}
 					}
-
-				}
+                }
 
 				foreach (var attachment in attachments)
 					mailItem.Attachments.Add(attachment.TempFile, attachment.AttachmentType, 1, attachment.FileName);
-
-				// Warning: Saving could save the message back to the server, not just locally
-				//mailItem.Save();
+					
 			}
+
+            // Warning: Saving could save the message back to the server, not just locally
+            //mailItem.Save();
 		}
 
 		#endregion
 
+		// Checks if there are encrypted Attachments
+        bool checkIfAttachmentsEncrypted(Outlook.MailItem mailItem)
+        {
+            List<Microsoft.Office.Interop.Outlook.Attachment> mailAttachments = new List<Outlook.Attachment>();
+            foreach (Microsoft.Office.Interop.Outlook.Attachment attachment in mailItem.Attachments)
+                mailAttachments.Add(attachment);
+
+            List<Attachment> attachments = new List<Attachment>();
+
+            foreach (var attachment in mailAttachments)
+            {
+                if (attachment.FileName.EndsWith(".pgp"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+		
 		bool PromptForPasswordAndKey()
 		{
 			if (this.Passphrase != null)

@@ -874,7 +874,7 @@ namespace Deja.Crypto.BcPgp
 
 						using (var encryptOut = cryptData.Open(armoredOut, clearData.Length))
 						{
-							encryptOut.Write(clearData, 0, clearData.Length);
+					                encryptOut.Write(clearData, 0, clearData.Length);
 						}
 					}
 				}

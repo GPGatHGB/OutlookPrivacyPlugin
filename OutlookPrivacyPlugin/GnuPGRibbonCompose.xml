@@ -20,6 +20,12 @@
                         onAction="OnEncryptButton" 
                         getPressed="GetPressed" 
                         getImage="GetCustomImage" />
+          <toggleButton id="onlyAttachments"
+                        size="normal"
+                        label="Only Attachments"
+                        screentip="Only Attachments"
+                        supertip="Digitally only encrypt and or sign the attachments so the other people can be sure that it came from you."
+                        onAction="OnOnlyAttachmentsButton" />
           <button id="attachPublicKeyButton"
 						  size="normal"
 						  label="Attach Key"

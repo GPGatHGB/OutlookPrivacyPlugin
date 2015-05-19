@@ -34,10 +34,13 @@ namespace OutlookPrivacyPlugin
 		public bool SignButton = false;
 		public bool EncryptButton = false;
 
-		public ButtonStateData(bool sign, bool encrypt)
+        public bool OnlyAttachmentsButton = false;
+
+        public ButtonStateData(bool sign, bool encrypt, bool onlyAttachments)
 		{
 			SignButton = sign;
 			EncryptButton = encrypt;
+            OnlyAttachmentsButton = onlyAttachments;
 		}
 	}
 
@@ -54,6 +57,8 @@ namespace OutlookPrivacyPlugin
 		public GnuPGToggleButton DecryptButton;
 		public GnuPGToggleButton AttachPublicKeyButton;
 
+        public GnuPGToggleButton OnlyAttachmentsButton;
+
 		public Dictionary<string, ButtonStateData> ButtonState = new Dictionary<string, ButtonStateData>();
 
 		private Dictionary<string, GnuPGToggleButton> Buttons = new Dictionary<string, GnuPGToggleButton>();
@@ -66,11 +71,15 @@ namespace OutlookPrivacyPlugin
 			DecryptButton = new GnuPGToggleButton("decryptButton");
 			AttachPublicKeyButton = new GnuPGToggleButton("attachPublicKeyButton");
 
+            OnlyAttachmentsButton = new GnuPGToggleButton("onlyAttachmentsButton");
+
 			Buttons.Add(SignButton.Id, SignButton);
 			Buttons.Add(EncryptButton.Id, EncryptButton);
 			Buttons.Add(VerifyButton.Id, VerifyButton);
 			Buttons.Add(DecryptButton.Id, DecryptButton);
 			Buttons.Add(AttachPublicKeyButton.Id, AttachPublicKeyButton);
+
+            Buttons.Add(OnlyAttachmentsButton.Id, OnlyAttachmentsButton);
 		}
 
 		#region IRibbonExtensibility Members
@@ -102,6 +111,8 @@ namespace OutlookPrivacyPlugin
 			SignButton.Checked = settings.AutoSign;
 			AttachPublicKeyButton.Checked = false;
 
+            OnlyAttachmentsButton.Checked = false;
+
 			// Read Mail
 			DecryptButton.Checked = settings.AutoDecrypt;
 			VerifyButton.Checked = settings.AutoVerify;
@@ -117,6 +128,8 @@ namespace OutlookPrivacyPlugin
 			ribbon.InvalidateControl(VerifyButton.Id);
 			ribbon.InvalidateControl(DecryptButton.Id);
 			ribbon.InvalidateControl(AttachPublicKeyButton.Id);
+
+            ribbon.InvalidateControl(OnlyAttachmentsButton.Id);
 		}
 
 		#region Ribbon Callbacks
@@ -152,6 +165,33 @@ namespace OutlookPrivacyPlugin
 			EncryptButton.Checked = isPressed;
 			ribbon.InvalidateControl(EncryptButton.Id);
 		}
+
+        public void OnOnlyAttachmentsButton(Office.IRibbonControl control, bool isPressed)
+        {
+            logger.Trace("OnOnlyAttachmentsButton(" + control.Id + ", " + isPressed + ")");
+
+            Outlook.MailItem mailItem = ((Outlook.Inspector)control.Context).CurrentItem as Outlook.MailItem;
+            if (mailItem == null)
+                logger.Trace("OnOnlyAttachmentsButton: mailItem == null");
+
+            if (isPressed == true)
+            {
+                if (mailItem != null)
+                {
+                    var settings = new Properties.Settings();
+                    if (settings.Default2PlainFormat)
+                    {
+                        string body = mailItem.Body;
+                        mailItem.BodyFormat = Outlook.OlBodyFormat.olFormatPlain;
+                        mailItem.Body = body;
+                    }
+                }
+            }
+
+            //OutlookPrivacyPlugin.SetProperty(mailItem, "GnuPGSetting.Encrypt", isPressed);
+            OnlyAttachmentsButton.Checked = isPressed;
+            ribbon.InvalidateControl(OnlyAttachmentsButton.Id);
+        }
 
 		public void OnDecryptButton(Office.IRibbonControl control)
 		{
