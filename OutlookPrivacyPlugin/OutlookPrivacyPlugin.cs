@@ -1632,7 +1632,7 @@ namespace OutlookPrivacyPlugin
 
             CryptoContext Context;
 
-			if (Regex.IsMatch(mailItem.Body, _pgpEncryptedHeader) == false)
+			if (!encryptedBody && !encryptedAttachments)
 			{
 				MessageBox.Show(
 					"Outlook Privacy Plugin cannot help here.",
