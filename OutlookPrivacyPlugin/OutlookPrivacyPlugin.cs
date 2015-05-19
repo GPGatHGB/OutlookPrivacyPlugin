@@ -785,7 +785,8 @@ namespace OutlookPrivacyPlugin
 			{
 				if (!msg.Body.TrimStart().ToLower().StartsWith("<html"))
 				{
-					body = DecryptAndVerifyHeaderMessage + msg.Body;
+					//body = DecryptAndVerifyHeaderMessage + msg.Body;
+                    body = msg.Body;
 					body = System.Net.WebUtility.HtmlEncode(body);
 					body = body.Replace("\n", "<br />");
 
@@ -1486,8 +1487,13 @@ namespace OutlookPrivacyPlugin
 			string mail = mailItem.Body;
 			Outlook.OlBodyFormat mailType = mailItem.BodyFormat;
 
-            Match match= Regex.Match(mailItem.Body, _pgpSignedHeader);
+            Match match = null;
             string unsigned_part = null;
+
+            if (mail != null)
+            {
+                match = Regex.Match(mailItem.Body, _pgpSignedHeader);
+            }
 
             verificationBar bar = null;
             foreach (Microsoft.Office.Tools.Outlook.IFormRegion formRegion in Globals.FormRegions)
