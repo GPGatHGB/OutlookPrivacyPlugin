@@ -306,7 +306,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>1195F55F64A9D5245BF6EF94A9A6F834E5CB87C3</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3C2519124CEC8433B5F6A7534049B433F70138A1</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
