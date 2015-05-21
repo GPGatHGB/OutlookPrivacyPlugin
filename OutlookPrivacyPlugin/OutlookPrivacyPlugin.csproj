@@ -302,10 +302,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>OutlookPrivacyPlugin_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>70D1B0A0D1300B759FE31A06F1C98F604E61DCD8</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>1195F55F64A9D5245BF6EF94A9A6F834E5CB87C3</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

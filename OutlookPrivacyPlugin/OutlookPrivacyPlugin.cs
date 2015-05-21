@@ -1091,7 +1091,6 @@ namespace OutlookPrivacyPlugin
 
             currentRibbon.EncryptButton.Checked = false;
             currentRibbon.SignButton.Checked = false;
-            currentRibbon.OnlyAttachmentsButton.Checked = false;
 
 			// Early out when we don't need to sign/encrypt
 			if (!needToEncrypt && !needToSign)
@@ -1218,6 +1217,10 @@ namespace OutlookPrivacyPlugin
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
 
+                        ribbon.SignButton.Checked = false;
+                        OutlookPrivacyPlugin.SetProperty(mailItem, "GnuPGSetting.Sign", ribbon.SignButton.Checked);
+                        ribbon.InvalidateButtons();
+                        
                         Cancel = true;
 
                         return;
@@ -1813,7 +1816,10 @@ namespace OutlookPrivacyPlugin
 
 				foreach (var attachment in attachments)
 					mailItem.Attachments.Add(attachment.TempFile, attachment.AttachmentType, 1, attachment.FileName);
-					
+
+                //ribbon.DecryptButton.Enabled = false;
+                //OutlookPrivacyPlugin.SetProperty(mailItem, "GnuPGSetting.Decrypt", ribbon.DecryptButton.Enabled);
+                //ribbon.InvalidateButtons();
 			}
 
             // Warning: Saving could save the message back to the server, not just locally

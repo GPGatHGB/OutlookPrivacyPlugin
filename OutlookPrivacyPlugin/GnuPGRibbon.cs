@@ -188,7 +188,7 @@ namespace OutlookPrivacyPlugin
                 }
             }
 
-            //OutlookPrivacyPlugin.SetProperty(mailItem, "GnuPGSetting.Encrypt", isPressed);
+            OutlookPrivacyPlugin.SetProperty(mailItem, "GnuPGSetting.OnlyAttachments", isPressed);
             OnlyAttachmentsButton.Checked = isPressed;
             ribbon.InvalidateControl(OnlyAttachmentsButton.Id);
         }
