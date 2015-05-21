@@ -1528,6 +1528,10 @@ namespace OutlookPrivacyPlugin
                 // Mail partial signed
                 unsigned_part = Regex.Match(mail, "((.)\n*)*?(?=-----BEGIN PGP SIGNED MESSAGE)").ToString();
                 mail = Regex.Match(mail, "(-){5}BEGIN PGP( SIGNED)? MESSAGE((.)*\n)*").ToString();
+
+                // Handle line break before a completely signed mail
+                if(unsigned_part.Equals("\r\n"))
+                    unsigned_part = null;
             }
 
 			var Context = new CryptoContext(Passphrase);
@@ -1895,18 +1899,24 @@ namespace OutlookPrivacyPlugin
 				    {
                         message += "Valid Signature! User ID: " + Context.SignedByUserId +
 						    " Key ID: " + Context.SignedByKeyId;
-                        bar.status_green(message);
-
+                        if (bar != null)
+                            bar.status_green(message);
 				    }
 				    else if (Context.IsSigned)
 				    {
                         message += "Invalid Signature! User ID: " + Context.SignedByUserId +
 						    " Key ID: " + Context.SignedByKeyId;
-                        bar.status_red(message);
+                        if(bar != null)
+                            bar.status_red(message);
 				    }
                     else
                     {
-                        bar.status_gray(message);
+                        if (bar != null)
+                            bar.status_gray(message);
+                    }
+                    if(bar == null) {
+                        MessageBox.Show(message, "Decryption and Signature Validation",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
 				outContext = Context;
