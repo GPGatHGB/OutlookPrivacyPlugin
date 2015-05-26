@@ -372,6 +372,8 @@ namespace OutlookPrivacyPlugin
 			{
 				// Default: disable read-buttons
 				ribbon.DecryptButton.Enabled = ribbon.VerifyButton.Enabled = false;
+                var decrypted = false;
+
 
 				// Look for PGP headers
 				Match match = null;
@@ -407,6 +409,7 @@ namespace OutlookPrivacyPlugin
 
 					_autoDecrypt = false;
 					DecryptEmail(mailItem);
+                    decrypted = true;
 					// Update match again, in case decryption failed/cancelled.
 					match = Regex.Match(mailItem.Body, _pgpHeaderPattern);
 
@@ -509,7 +512,13 @@ namespace OutlookPrivacyPlugin
 					// if decryption is diselected, check the attachments, if only attachments are encrypted
                     if (ribbon.DecryptButton.Enabled == false)
                     {
-                        ribbon.DecryptButton.Enabled = checkIfAttachmentsEncrypted(mailItem);
+                        //ribbon.DecryptButton.Enabled = checkIfAttachmentsEncrypted(mailItem);
+                        if (decrypted == false && checkIfAttachmentsEncrypted(mailItem))
+                        {
+                            DecryptEmail(mailItem);
+
+                            SetProperty(mailItem, "GnuPGSetting.Decrypted", true);
+                        }
                     }
 				}
 			}
@@ -1727,15 +1736,14 @@ namespace OutlookPrivacyPlugin
 
 					// content id
 
-					if (attachment.FileName.StartsWith("Attachment") && attachment.FileName.EndsWith(".pgp"))
+					if (attachment.FileName.EndsWith(".pgp"))
 					{
-						var property = attachment.PropertyAccessor.GetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001F");
-						a.FileName = property.ToString();
+						//var property = attachment.PropertyAccessor.GetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001F");
+						//a.FileName = property.ToString();
 
-						if (a.FileName.Contains('@'))
-						{
-							a.FileName = a.FileName.Substring(0, a.FileName.IndexOf('@'));
-						}
+                        a.FileName = attachment.FileName;
+
+						a.FileName = a.FileName.Substring(0, a.FileName.IndexOf(".pgp"));
 
 						a.TempFile = Path.GetTempPath();
 						a.AttachmentType = attachment.Type;
@@ -1814,8 +1822,8 @@ namespace OutlookPrivacyPlugin
 					}
                 }
 
-				foreach (var attachment in attachments)
-					mailItem.Attachments.Add(attachment.TempFile, attachment.AttachmentType, 1, attachment.FileName);
+                foreach (var attachment in attachments)
+                    mailItem.Attachments.Add(attachment.TempFile, attachment.AttachmentType, 1, attachment.FileName);
 
                 //ribbon.DecryptButton.Enabled = false;
                 //OutlookPrivacyPlugin.SetProperty(mailItem, "GnuPGSetting.Decrypt", ribbon.DecryptButton.Enabled);
