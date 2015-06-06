@@ -778,14 +778,24 @@ namespace OutlookPrivacyPlugin
 					else
 					{
 						Context = Crypto.Context;
+                        if (mailType == Outlook.OlBodyFormat.olFormatPlain)
+                        {
+                            // look for Attachments beside the signaturefile
+                            if (mailItem.Attachments.Count > 1)
+                            {
+                                var message = "Validating PGP/MIME Signatures for Attachments is not supported.";
+                                bar.status_yellow(message);
+                            }
+                            else
+                            {
+                                var message = "Invalid signature! User ID: " + Context.SignedByUserId + " Key ID: " +
+                                    Context.SignedByKeyId;
+                                bar.status_red(message);
+                            }
 
-						var message = "Invalid signature! User ID: " + Context.SignedByUserId + " Key ID: " +
-							Context.SignedByKeyId;
-
-						if (mailType == Outlook.OlBodyFormat.olFormatPlain)
-                            bar.status_red(message);
-							//mailItem.Body = message + mailItem.Body;
-							//mailItem.HTMLBody = AddMessageToHtmlBody(mailItem.HTMLBody, message);
+                            //mailItem.Body = message + mailItem.Body;
+                            //mailItem.HTMLBody = AddMessageToHtmlBody(mailItem.HTMLBody, message);
+                        }
 					}
 				}
 				catch (PublicKeyNotFoundException ex)
@@ -855,7 +865,7 @@ namespace OutlookPrivacyPlugin
 					}
 				}
 			}
-            
+            /*
 			var DecryptAndVerifyHeaderMessage = "";
             
 			if (Context.IsEncrypted)
@@ -878,7 +888,7 @@ namespace OutlookPrivacyPlugin
 				DecryptAndVerifyHeaderMessage += Localized.MsgUnsigned;
 
 			DecryptAndVerifyHeaderMessage += "\n\n";
-            
+            */
 			if(isHtml)
 			{
                 var htmlBody = msg.HtmlBody;
@@ -948,7 +958,7 @@ namespace OutlookPrivacyPlugin
                 }
 
                 mailItem.BodyFormat = Outlook.OlBodyFormat.olFormatHTML;
-                mailItem.HTMLBody = AddMessageToHtmlBody(htmlBody, DecryptAndVerifyHeaderMessage);
+                //mailItem.HTMLBody = AddMessageToHtmlBody(htmlBody, DecryptAndVerifyHeaderMessage);
             }
             else
             {
@@ -956,22 +966,24 @@ namespace OutlookPrivacyPlugin
                 //       So if we are set to HTML we need to wrap the plain text so it's
                 //       displayed okay. Also of course prevent XSS.
 
-                if (mailItem.BodyFormat == Outlook.OlBodyFormat.olFormatPlain)
-                {
-                    mailItem.Body = DecryptAndVerifyHeaderMessage + msg.TextBody;
-                }
-                else
+                if (mailItem.BodyFormat != Outlook.OlBodyFormat.olFormatPlain)
                 {
                     var sb = new StringBuilder(msg.TextBody.Length + 100);
                     sb.Append("<html><body><pre>");
-                    sb.Append(System.Net.WebUtility.HtmlEncode(DecryptAndVerifyHeaderMessage));
+                    //sb.Append(System.Net.WebUtility.HtmlEncode(DecryptAndVerifyHeaderMessage));
                     sb.Append(System.Net.WebUtility.HtmlEncode(msg.TextBody));
                     sb.Append("</pre></body></html>");
 
                     mailItem.HTMLBody = sb.ToString();
                 }
+                /*
+                else
+                {
+                    //mailItem.Body = DecryptAndVerifyHeaderMessage + msg.TextBody;
+                }
+                */
             }
-
+            
             // NOTE: Removing existing attachments is perminant, even if the message
             //       is not saved.
 
