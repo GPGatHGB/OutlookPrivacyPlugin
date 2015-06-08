@@ -690,7 +690,8 @@ namespace OutlookPrivacyPlugin
 				if (clearbytes == null)
 					return;
 
-				cleartext = this._encoding.GetString(clearbytes);
+				cleartext = this._encoding.GetString(clearbytes);s
+                
 			}
 
 			// 2. Verify signature
@@ -723,7 +724,6 @@ namespace OutlookPrivacyPlugin
 					// Build up a clearsignature format for validation
 					// the rules for are the same with the addition of two header fields.
 					// Ultimately we need to get these fields out of email itself.
-                    // NOTE: encoding could be uppercase or lowercase.
 
 					// NOTE: encoding could be uppercase or lowercase. Try both.
 					//       this is definetly hacky :/
@@ -865,7 +865,7 @@ namespace OutlookPrivacyPlugin
 					}
 				}
 			}
-            /*
+            
 			var DecryptAndVerifyHeaderMessage = "";
             
 			if (Context.IsEncrypted)
@@ -888,7 +888,7 @@ namespace OutlookPrivacyPlugin
 				DecryptAndVerifyHeaderMessage += Localized.MsgUnsigned;
 
 			DecryptAndVerifyHeaderMessage += "\n\n";
-            */
+            
 			if(isHtml)
 			{
                 var htmlBody = msg.HtmlBody;
@@ -1767,7 +1767,7 @@ namespace OutlookPrivacyPlugin
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Signature!", "Signature Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Unable to Verify! (Missing Public Key)", "Missing Public Key", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 				/*const string message = "** Unable to verify signature, missing public key.\n\n";
@@ -2028,7 +2028,7 @@ namespace OutlookPrivacyPlugin
                     bar = (verificationBar)formRegion;
                 }
             }
-
+            
 			try
 			{
 				var cleartext = Crypto.DecryptAndVerify(data, _settings.IgnoreIntegrityCheck);
