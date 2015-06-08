@@ -690,7 +690,7 @@ namespace OutlookPrivacyPlugin
 				if (clearbytes == null)
 					return;
 
-				cleartext = this._encoding.GetString(clearbytes);s
+				cleartext = this._encoding.GetString(clearbytes);
                 
 			}
 
