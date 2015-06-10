@@ -711,7 +711,8 @@ namespace OutlookPrivacyPlugin
                     // Text
                     string body = Regex.Match(cleartext, "(?=Content-Transfer-Encoding:)((.)*\n)*?(?=--)").Value;
                     // Signature
-                    string signature = Regex.Match(cleartext, "-----BEGIN PGP SIGNATURE-----((.)*\n(.)*)*-----").Value;
+                    //string signature = Regex.Match(cleartext, "-----BEGIN PGP SIGNATURE-----((.)*\n(.)*)*-----").Value;
+                    string signature = Regex.Match(cleartext, "(?=-----BEGIN PGP SIGNATURE-----)((.)*\n(.)*)*(?>PGP SIGNATURE-----)").Value;
 
 
                     clearsig.Append(string.Format("-----BEGIN PGP SIGNED MESSAGE-----\r\nHash: {0}\r\nCharset: {1}\r\n\r\n", sigMatch, charset));
