@@ -21,32 +21,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0BA3DF172ECB63694229C4CFFE961750"
+        "MsmKey" = "8:_1B86CE3F088BE713CFD522060C5AE685"
+        "OwnerKey" = "8:_6AF61B21FBEB9A3941CDEF9545FC8DAD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1B86CE3F088BE713CFD522060C5AE685"
+        "OwnerKey" = "8:_5D1F44CDE2DE4F81A55F9F1E3BF2C3F3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1B86CE3F088BE713CFD522060C5AE685"
         "OwnerKey" = "8:_2F760E10CE1A465CB0486FDAA535C258"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0BA3DF172ECB63694229C4CFFE961750"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0BA3DF172ECB63694229C4CFFE961750"
-        "OwnerKey" = "8:_82C2B8C980DE21FA99D229AE93C29D87"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_15CC4EABD4C4382EA95E53B48E221983"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_15CC4EABD4C4382EA95E53B48E221983"
-        "OwnerKey" = "8:_55AE5E67825BBAB923794D9A6CAEB33D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -57,14 +45,44 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1E57D7652F1F6413BD3E042BF3B8CA9E"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
+        "MsmKey" = "8:_1C58888D8684FCE19489C8ABAB632517"
+        "OwnerKey" = "8:_1B86CE3F088BE713CFD522060C5AE685"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1F57876592774E91B98C21E6662D184D"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_1C58888D8684FCE19489C8ABAB632517"
+        "OwnerKey" = "8:_5D1F44CDE2DE4F81A55F9F1E3BF2C3F3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1C58888D8684FCE19489C8ABAB632517"
+        "OwnerKey" = "8:_2F760E10CE1A465CB0486FDAA535C258"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1C58888D8684FCE19489C8ABAB632517"
+        "OwnerKey" = "8:_6AF61B21FBEB9A3941CDEF9545FC8DAD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2EC0DBBA57858CF19D2D59EAF552A73F"
+        "OwnerKey" = "8:_6AF61B21FBEB9A3941CDEF9545FC8DAD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2EC0DBBA57858CF19D2D59EAF552A73F"
+        "OwnerKey" = "8:_5D1F44CDE2DE4F81A55F9F1E3BF2C3F3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2EC0DBBA57858CF19D2D59EAF552A73F"
+        "OwnerKey" = "8:_2F760E10CE1A465CB0486FDAA535C258"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -75,20 +93,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_46B4873C16FC3AE37895E511C03DA349"
-        "OwnerKey" = "8:_15CC4EABD4C4382EA95E53B48E221983"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_46B4873C16FC3AE37895E511C03DA349"
-        "OwnerKey" = "8:_55AE5E67825BBAB923794D9A6CAEB33D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_46B4873C16FC3AE37895E511C03DA349"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
+        "MsmKey" = "8:_3BFB204E813433528177E40DF81F9C12"
+        "OwnerKey" = "8:_2F760E10CE1A465CB0486FDAA535C258"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -99,74 +105,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_55AE5E67825BBAB923794D9A6CAEB33D"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5D1F44CDE2DE4F81A55F9F1E3BF2C3F3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_667DA295EE1BC3BA9C7C0FB29C5705E4"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6EB5C38410524DD9B2BFED4D393E828C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7F8334435788100404D69A81634D3B13"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8026A4C93A4D3C82F5B29F721BAFEE08"
+        "MsmKey" = "8:_6AF61B21FBEB9A3941CDEF9545FC8DAD"
         "OwnerKey" = "8:_2F760E10CE1A465CB0486FDAA535C258"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8026A4C93A4D3C82F5B29F721BAFEE08"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8026A4C93A4D3C82F5B29F721BAFEE08"
-        "OwnerKey" = "8:_82C2B8C980DE21FA99D229AE93C29D87"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_82C2B8C980DE21FA99D229AE93C29D87"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_866549FDC36448BC9281278243A5394A"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8BA066A723BD08DAE604495D7AEF23A1"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8BA066A723BD08DAE604495D7AEF23A1"
-        "OwnerKey" = "8:_7F8334435788100404D69A81634D3B13"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -189,12 +141,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D295F728535886D8416D2F4EC4C8CEF4"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_E5CE0169788D47E8996407C36A703B22"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -213,92 +159,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F1B97137F8CAFB5B700D2FF1F1F22463"
-        "OwnerKey" = "8:_1E57D7652F1F6413BD3E042BF3B8CA9E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F1B97137F8CAFB5B700D2FF1F1F22463"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0BA3DF172ECB63694229C4CFFE961750"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_51A2B817C0E241C68C1A3F19DB496DFC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_053CC2CD1D974CCCBE72ACCBBDF2B5C1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_82C2B8C980DE21FA99D229AE93C29D87"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_667DA295EE1BC3BA9C7C0FB29C5705E4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1E57D7652F1F6413BD3E042BF3B8CA9E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F1B97137F8CAFB5B700D2FF1F1F22463"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7F8334435788100404D69A81634D3B13"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_55AE5E67825BBAB923794D9A6CAEB33D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8BA066A723BD08DAE604495D7AEF23A1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_15CC4EABD4C4382EA95E53B48E221983"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_46B4873C16FC3AE37895E511C03DA349"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D295F728535886D8416D2F4EC4C8CEF4"
+        "OwnerKey" = "8:_2F760E10CE1A465CB0486FDAA535C258"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -310,13 +172,37 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2F760E10CE1A465CB0486FDAA535C258"
+        "OwnerKey" = "8:_51A2B817C0E241C68C1A3F19DB496DFC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8026A4C93A4D3C82F5B29F721BAFEE08"
+        "OwnerKey" = "8:_3BFB204E813433528177E40DF81F9C12"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_6AF61B21FBEB9A3941CDEF9545FC8DAD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2EC0DBBA57858CF19D2D59EAF552A73F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1B86CE3F088BE713CFD522060C5AE685"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1C58888D8684FCE19489C8ABAB632517"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -414,51 +300,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0BA3DF172ECB63694229C4CFFE961750"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1B86CE3F088BE713CFD522060C5AE685"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Org.BouncyCastle, Version=1.7.5597.18728, Culture=neutral, PublicKeyToken=f9d2ceb53063a3bf, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77"
                 "ScatterAssemblies"
                 {
-                    "_0BA3DF172ECB63694229C4CFFE961750"
+                    "_1B86CE3F088BE713CFD522060C5AE685"
                     {
-                    "Name" = "8:Org.BouncyCastle.dll"
+                    "Name" = "8:nunit.core.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Org.BouncyCastle.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_15CC4EABD4C4382EA95E53B48E221983"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Office.Tools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_15CC4EABD4C4382EA95E53B48E221983"
-                    {
-                    "Name" = "8:Microsoft.Office.Tools.Common.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Microsoft.Office.Tools.Common.dll"
+            "SourcePath" = "8:nunit.core.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
@@ -496,20 +351,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1E57D7652F1F6413BD3E042BF3B8CA9E"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1C58888D8684FCE19489C8ABAB632517"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Office.Tools.v4.0.Framework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nunit.core.interfaces, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77"
                 "ScatterAssemblies"
                 {
-                    "_1E57D7652F1F6413BD3E042BF3B8CA9E"
+                    "_1C58888D8684FCE19489C8ABAB632517"
                     {
-                    "Name" = "8:Microsoft.Office.Tools.v4.0.Framework.dll"
+                    "Name" = "8:nunit.core.interfaces.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Microsoft.Office.Tools.v4.0.Framework.dll"
+            "SourcePath" = "8:nunit.core.interfaces.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
@@ -527,40 +382,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F57876592774E91B98C21E6662D184D"
-            {
-            "SourcePath" = "8:..\\OutlookPrivacyPlugin\\bin\\Debug\\OutlookPrivacyPlugin.vsto"
-            "TargetName" = "8:OutlookPrivacyPlugin.vsto"
-            "Tag" = "8:"
-            "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_46B4873C16FC3AE37895E511C03DA349"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2EC0DBBA57858CF19D2D59EAF552A73F"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Office.Tools, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77"
                 "ScatterAssemblies"
                 {
-                    "_46B4873C16FC3AE37895E511C03DA349"
+                    "_2EC0DBBA57858CF19D2D59EAF552A73F"
                     {
-                    "Name" = "8:Microsoft.Office.Tools.dll"
+                    "Name" = "8:nunit.framework.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Microsoft.Office.Tools.dll"
+            "SourcePath" = "8:nunit.framework.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
@@ -578,127 +413,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_55AE5E67825BBAB923794D9A6CAEB33D"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3BFB204E813433528177E40DF81F9C12"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Office.Tools.Outlook, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:NLog, Version=3.2.1.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_55AE5E67825BBAB923794D9A6CAEB33D"
-                    {
-                    "Name" = "8:Microsoft.Office.Tools.Outlook.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Microsoft.Office.Tools.Outlook.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_667DA295EE1BC3BA9C7C0FB29C5705E4"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SharpMimeTools, Version=0.6.4861.34628, Culture=neutral, PublicKeyToken=f9d2ceb53063a3bf, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_667DA295EE1BC3BA9C7C0FB29C5705E4"
-                    {
-                    "Name" = "8:SharpMimeTools.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:SharpMimeTools.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6EB5C38410524DD9B2BFED4D393E828C"
-            {
-            "SourcePath" = "8:..\\OutlookPrivacyPlugin\\bin\\Debug\\OutlookPrivacyPlugin.dll.manifest"
-            "TargetName" = "8:OutlookPrivacyPlugin.dll.manifest"
-            "Tag" = "8:"
-            "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7F8334435788100404D69A81634D3B13"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Office.Tools.Outlook.v4.0.Utilities, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_7F8334435788100404D69A81634D3B13"
-                    {
-                    "Name" = "8:Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8026A4C93A4D3C82F5B29F721BAFEE08"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NLog, Version=2.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_8026A4C93A4D3C82F5B29F721BAFEE08"
+                    "_3BFB204E813433528177E40DF81F9C12"
                     {
                     "Name" = "8:NLog.dll"
                     "Attributes" = "3:512"
@@ -722,20 +444,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_82C2B8C980DE21FA99D229AE93C29D87"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6AF61B21FBEB9A3941CDEF9545FC8DAD"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Deja.Crypto, Version=2.0.5617.28064, Culture=neutral, PublicKeyToken=f9d2ceb53063a3bf, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:crypto, Version=1.8.5636.21699, Culture=neutral, PublicKeyToken=f9d2ceb53063a3bf, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_82C2B8C980DE21FA99D229AE93C29D87"
+                    "_6AF61B21FBEB9A3941CDEF9545FC8DAD"
                     {
-                    "Name" = "8:Deja.Crypto.dll"
+                    "Name" = "8:crypto.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Deja.Crypto.dll"
+            "SourcePath" = "8:crypto.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
@@ -771,37 +493,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8BA066A723BD08DAE604495D7AEF23A1"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Office.Tools.Common.v4.0.Utilities, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_8BA066A723BD08DAE604495D7AEF23A1"
-                    {
-                    "Name" = "8:Microsoft.Office.Tools.Common.v4.0.Utilities.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Microsoft.Office.Tools.Common.v4.0.Utilities.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8DCB5D43E6F54D5CB72C46555DAFE335"
@@ -864,37 +555,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D295F728535886D8416D2F4EC4C8CEF4"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-                "ScatterAssemblies"
-                {
-                    "_D295F728535886D8416D2F4EC4C8CEF4"
-                    {
-                    "Name" = "8:stdole.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:stdole.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E5CE0169788D47E8996407C36A703B22"
             {
             "SourcePath" = "8:..\\OutlookPrivacyPlugin\\bin\\Debug\\Resources\\GpgLogo.png"
@@ -953,37 +613,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F1B97137F8CAFB5B700D2FF1F1F22463"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.VisualStudio.Tools.Applications.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_F1B97137F8CAFB5B700D2FF1F1F22463"
-                    {
-                    "Name" = "8:Microsoft.VisualStudio.Tools.Applications.Runtime.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Microsoft.VisualStudio.Tools.Applications.Runtime.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -1748,7 +1377,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5D1F44CDE2DE4F81A55F9F1E3BF2C3F3"
             {
-            "SourcePath" = "8:..\\3rdParty\\bccrypto-net-1.7\\crypto\\obj\\Debug\\Org.BouncyCastle.dll"
+            "SourcePath" = "8:..\\3rdParty\\bccrypto-net-05282015\\crypto\\obj\\Debug\\crypto.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E1BE4607A539400FAD345147850B07E7"

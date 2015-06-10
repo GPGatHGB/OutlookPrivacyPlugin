@@ -675,8 +675,16 @@ namespace OutlookPrivacyPlugin
 			byte[] clearbytes = null;
 			string cleartext = mailItem.Body;
 
-			// 1. Decrypt attachement
+            verificationBar bar = null;
+            foreach (Microsoft.Office.Tools.Outlook.IFormRegion formRegion in Globals.FormRegions)
+            {
+                if (formRegion is verificationBar)
+                {
+                    bar = (verificationBar)formRegion;
+                }
+            }
 
+			// 1. Decrypt attachement
 			if (encryptedMime != null)
 			{
 				logger.Trace("Decrypting cypher text.");
@@ -691,18 +699,62 @@ namespace OutlookPrivacyPlugin
 					return;
 
 				cleartext = this._encoding.GetString(clearbytes);
+
+                // Apple Workaround -> RegEx-Magic
+                if (cleartext.Contains("application/pgp-signature"))
+                {
+                    StringBuilder clearsig = new StringBuilder();
+                    // Hash
+                    string sigMatch = Regex.Match(cleartext, "(?<=micalg=pgp-)(.)*(?=\r)").Value;
+                    // Charset
+                    string charset = Regex.Match(cleartext, "(?<=charset=)(.)*(?=\r)").Value;
+                    // Text
+                    string body = Regex.Match(cleartext, "(?=Content-Transfer-Encoding:)((.)*\n)*?(?=--)").Value;
+                    // Signature
+                    string signature = Regex.Match(cleartext, "-----BEGIN PGP SIGNATURE-----((.)*\n(.)*)*-----").Value;
+
+
+                    clearsig.Append(string.Format("-----BEGIN PGP SIGNED MESSAGE-----\r\nHash: {0}\r\nCharset: {1}\r\n\r\n", sigMatch, charset));
+                    clearsig.Append(body);
+                    clearsig.Append(signature);
+
+                    var encoding = Encoding.GetEncoding(charset);
+
+                    Context = new CryptoContext(PasswordCallback, _settings.Cipher, _settings.Digest);
+				    var Crypto = new PgpCrypto(Context);
+
+                    
+
+                    if (Crypto.VerifyClear(_encoding.GetBytes(clearsig.ToString())))
+                    {
+                        Context = Crypto.Context;
+
+                        var message = "Message decrypted. Valid signature! User ID: " + Context.SignedByUserId + " Key ID: " +
+                            Context.SignedByKeyId;
+
+                        bar.status_green(message);
+                    }
+                    else
+                    {
+                        Context = Crypto.Context;
+
+                        // should have .dat-File encrypted.asc and signature.asc
+                        if (mailItem.Attachments.Count > 3)
+                        {
+                            var message = "Message decrypted. Validating PGP/MIME Signatures for Attachments is not supported.";
+                            bar.status_yellow(message);
+                        }
+                        else
+                        {
+                            var message = "Message decrypted. Invalid signature! User ID: " + Context.SignedByUserId + " Key ID: " +
+                                    Context.SignedByKeyId;
+                            bar.status_red(message);
+                        }
+                    }
+                }
 			}
 
 			// 2. Verify signature
-            verificationBar bar = null;
-            foreach (Microsoft.Office.Tools.Outlook.IFormRegion formRegion in Globals.FormRegions)
-            {
-                if (formRegion is verificationBar)
-                {
-                    bar = (verificationBar)formRegion;
-                }
-            }
-
 			if (sigMime != null)
 			{
 				Context = new CryptoContext(PasswordCallback, _settings.Cipher, _settings.Digest);
@@ -763,7 +815,22 @@ namespace OutlookPrivacyPlugin
                     
 					logger.Trace(clearsigUpper.ToString());
 
-					if (Crypto.VerifyClear(_encoding.GetBytes(clearsigUpper.ToString())) || Crypto.VerifyClear(_encoding.GetBytes(clearsigLower.ToString())))
+                    var clearsigApple = new StringBuilder();
+
+                    clearsigApple.Append(string.Format("-----BEGIN PGP SIGNED MESSAGE-----\r\nHash: {0}\r\nCharset: {1}\r\n\r\n", sigHash, encoding.BodyName));
+                    clearsigApple.Append("Content-Transfer-Encoding: 7bit");
+                    clearsigApple.Append("\r\nContent-Type: text/plain;\r\n\tcharset=");
+                    clearsigApple.Append(encoding.BodyName.ToLower());
+                    clearsigApple.Append("\r\n\r\n");
+                    clearsigApple.Append(PgpClearDashEscapeAndQuoteEncode(
+						encoding.GetString(
+						(byte[])mailItem.PropertyAccessor.GetProperty(
+							"http://schemas.microsoft.com/mapi/string/{4E3A7680-B77A-11D0-9DA5-00C04FD65685}/Internet Charset Body/0x00000102"))));
+                    
+                    clearsigApple.Append("\r\n");
+					clearsigApple.Append(detachedsig);
+
+					if (Crypto.VerifyClear(_encoding.GetBytes(clearsigUpper.ToString())) || Crypto.VerifyClear(_encoding.GetBytes(clearsigLower.ToString())) || Crypto.VerifyClear(_encoding.GetBytes(clearsigApple.ToString())))
 					{
 						Context = Crypto.Context;
 

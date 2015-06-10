@@ -936,10 +936,15 @@ namespace Deja.Crypto.BcPgp
 				{
 					foreach (var header in headers)
 					{
-						if (Regex.IsMatch(header, @"Charset: ([^\s]*)"))
+                       // Match charset = Regex.Match(header, @"[Cc]harset: ([^\s]*)");
+                        if (Regex.IsMatch(header, @"[Cc]harset[=:]( )?([^\s]*)"))
+                        //if(charset.Length > 0)
 						{
-							var encodingType = Regex.Match(header, @"Charset: ([^\s]*)").Groups[1].Value;
+                            Match test = Regex.Match(header, @"[Cc]harset[=:]( )?([^\s]*)");
+                            var encodingType = Regex.Match(header, @"[Cc]harset[=:]( )?([^\s]*)").Groups[2].Value;
+                            //var encodingType = charset.Groups[1].Value;
 							encoding = Encoding.GetEncoding(encodingType);
+                            break;
 						}
 					}
 				}
