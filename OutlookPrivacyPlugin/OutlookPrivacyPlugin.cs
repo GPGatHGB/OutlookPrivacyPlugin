@@ -671,6 +671,7 @@ namespace OutlookPrivacyPlugin
 			logger.Trace("> HandlePgpMime");
 			CryptoContext Context = null;
 
+            bool validSignature = false;
 			byte[] cyphertext = null;
 			byte[] clearbytes = null;
 			string cleartext = mailItem.Body;
@@ -700,7 +701,7 @@ namespace OutlookPrivacyPlugin
 
 				cleartext = this._encoding.GetString(clearbytes);
 
-                // Apple Workaround -> RegEx-Magic
+                // MIME signature workaround
                 if (cleartext.Contains("application/pgp-signature"))
                 {
                     StringBuilder clearsig = new StringBuilder();
@@ -711,45 +712,71 @@ namespace OutlookPrivacyPlugin
                     // Text
                     string body = Regex.Match(cleartext, "(?=Content-Transfer-Encoding:)((.)*\n)*?(?=--)").Value;
                     // Signature
-                    //string signature = Regex.Match(cleartext, "-----BEGIN PGP SIGNATURE-----((.)*\n(.)*)*-----").Value;
                     string signature = Regex.Match(cleartext, "(?=-----BEGIN PGP SIGNATURE-----)((.)*\n(.)*)*(?>PGP SIGNATURE-----)").Value;
 
-
-                    clearsig.Append(string.Format("-----BEGIN PGP SIGNED MESSAGE-----\r\nHash: {0}\r\nCharset: {1}\r\n\r\n", sigMatch, charset));
-                    clearsig.Append(body);
-                    clearsig.Append(signature);
-
-                    var encoding = Encoding.GetEncoding(charset);
-
-                    Context = new CryptoContext(PasswordCallback, _settings.Cipher, _settings.Digest);
-				    var Crypto = new PgpCrypto(Context);
-
-                    
-
-                    if (Crypto.VerifyClear(_encoding.GetBytes(clearsig.ToString())))
+                    if (sigMatch == "" || charset == "" || body == "" || signature == "")
                     {
-                        Context = Crypto.Context;
-
-                        var message = "Message decrypted. Valid signature! User ID: " + Context.SignedByUserId + " Key ID: " +
-                            Context.SignedByKeyId;
-
-                        bar.status_green(message);
+                        var message = "Verify Error!";
+                        bar.status_red(message);
                     }
                     else
                     {
-                        Context = Crypto.Context;
+                        clearsig.Append(string.Format("-----BEGIN PGP SIGNED MESSAGE-----\r\nHash: {0}\r\nCharset: {1}\r\n\r\n", sigMatch, charset));
+                        clearsig.Append(body);
+                        clearsig.Append(signature);
 
-                        // should have .dat-File encrypted.asc and signature.asc
-                        if (mailItem.Attachments.Count > 3)
+                        var encoding = Encoding.GetEncoding(charset);
+
+                        Context = new CryptoContext(PasswordCallback, _settings.Cipher, _settings.Digest);
+                        var Crypto = new PgpCrypto(Context);
+
+                        if (Crypto.VerifyClear(_encoding.GetBytes(clearsig.ToString())))
                         {
-                            var message = "Message decrypted. Validating PGP/MIME Signatures for Attachments is not supported.";
-                            bar.status_yellow(message);
+                            validSignature = true;
+
+                            Context = Crypto.Context;
+
+                            var message = "Message decrypted. Valid signature! User ID: " + Context.SignedByUserId + " Key ID: " +
+                                Context.SignedByKeyId;
+
+                            bar.status_green(message);
                         }
                         else
                         {
-                            var message = "Message decrypted. Invalid signature! User ID: " + Context.SignedByUserId + " Key ID: " +
-                                    Context.SignedByKeyId;
-                            bar.status_red(message);
+                            Context = Crypto.Context;
+
+                            // should have .dat-File encrypted.asc and signature.asc
+                            if (mailItem.Attachments.Count > 3)
+                            {
+                                var message = "Message decrypted. Validating PGP/MIME Signatures for Attachments is not supported.";
+                                bar.status_yellow(message);
+                            }
+                            else
+                            {
+                                string[] lines = Regex.Split(body.ToString(), "\r\n");
+
+                                bool lineExceed = true;
+                                foreach (string line in lines)
+                                {
+                                    if (line.Length > 76)
+                                    {
+                                        lineExceed = false;
+                                    }
+                                }
+
+                                if (lineExceed)
+                                {
+                                    var message = "Message decrypted. Invalid signature! User ID: " + Context.SignedByUserId + " Key ID: " +
+                                            Context.SignedByKeyId;
+                                    bar.status_red(message);
+                                }
+                                else
+                                {
+                                    var message = "Message decrypted. Can't verify signature (line character limit) User ID: " + Context.SignedByUserId;
+                                    //+" Key ID: " + Context.SignedByKeyId;
+                                    bar.status_yellow(message);
+                                }
+                            }
                         }
                     }
                 }
@@ -828,7 +855,7 @@ namespace OutlookPrivacyPlugin
 							"http://schemas.microsoft.com/mapi/string/{4E3A7680-B77A-11D0-9DA5-00C04FD65685}/Internet Charset Body/0x00000102"))));
                     
                     clearsigApple.Append("\r\n");
-					clearsigApple.Append(detachedsig);
+                    clearsigApple.Append(detachedsig);
 
 					if (Crypto.VerifyClear(_encoding.GetBytes(clearsigUpper.ToString())) || Crypto.VerifyClear(_encoding.GetBytes(clearsigLower.ToString())) || Crypto.VerifyClear(_encoding.GetBytes(clearsigApple.ToString())))
 					{
@@ -855,9 +882,30 @@ namespace OutlookPrivacyPlugin
                             }
                             else
                             {
-                                var message = "Invalid signature! User ID: " + Context.SignedByUserId + " Key ID: " +
-                                    Context.SignedByKeyId;
-                                bar.status_red(message);
+                                // body Part of the message should be the same in all clearsig variables
+                                string[] body = Regex.Split(clearsigApple.ToString(), "\r\n");
+
+                                bool lineExceed = true;
+                                foreach (string line in body)
+                                {
+                                    if (line.Length > 76)
+                                    {
+                                        lineExceed = false;
+                                    }
+                                }
+
+                                if (lineExceed)
+                                {
+                                    var message = "Invalid signature! User ID: " + Context.SignedByUserId + " Key ID: " +
+                                            Context.SignedByKeyId;
+                                    bar.status_red(message);
+                                }
+                                else
+                                {
+                                    var message = "Can't verify signature (line character limit) User ID: " + Context.SignedByUserId;
+                                    //+" Key ID: " + Context.SignedByKeyId;
+                                    bar.status_yellow(message);
+                                }
                             }
 
                             //mailItem.Body = message + mailItem.Body;
@@ -1067,6 +1115,12 @@ namespace OutlookPrivacyPlugin
                 mailItem.Attachments.Add(tempFile, Outlook.OlAttachmentType.olByValue, 1, fileName);
 
                 File.Delete(tempFile);
+            }
+
+            if (validSignature == false && mailItem.Attachments.Count > 3)
+            {
+                var message = "Message decrypted. Validating PGP/MIME Signatures for Attachments is not supported.";
+                bar.status_yellow(message);
             }
         }
 
