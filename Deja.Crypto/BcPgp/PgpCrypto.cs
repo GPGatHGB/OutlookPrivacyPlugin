@@ -923,7 +923,7 @@ namespace Deja.Crypto.BcPgp
 			Context = new CryptoContext(Context);
 
 			var crlf = new byte[] { (byte)'\r', (byte)'\n' };
-			var encoding = ASCIIEncoding.UTF8;
+            var encoding = Encoding.Default;
 
 			using (var dataIn = new MemoryStream(data))
 			using (var armoredIn = new ArmoredInputStream(dataIn))

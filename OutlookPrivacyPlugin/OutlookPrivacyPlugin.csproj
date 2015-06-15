@@ -223,12 +223,6 @@
     <Compile Include="FormSettings.Designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSelectLineWrap.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSelectLineWrap.Designer.cs">
-      <DependentUpon>FormSelectLineWrap.cs</DependentUpon>
-    </Compile>
     <Compile Include="verificationBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -261,9 +255,6 @@
     </Compile>
     <EmbeddedResource Include="FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSelectLineWrap.resx">
-      <DependentUpon>FormSelectLineWrap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="verificationBar.resx">
       <DependentUpon>verificationBar.cs</DependentUpon>
@@ -332,7 +323,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3C2519124CEC8433B5F6A7534049B433F70138A1</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>A669B25DB07C89B8BED61CDB005AFD3079072BB0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

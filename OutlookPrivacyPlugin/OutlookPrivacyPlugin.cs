@@ -1091,12 +1091,6 @@ namespace OutlookPrivacyPlugin
 
                     mailItem.HTMLBody = sb.ToString();
                 }
-                /*
-                else
-                {
-                    //mailItem.Body = DecryptAndVerifyHeaderMessage + msg.TextBody;
-                }
-                */
             }
             
             // NOTE: Removing existing attachments is perminant, even if the message
@@ -1385,8 +1379,8 @@ namespace OutlookPrivacyPlugin
 			bool onlyAttachments = currentRibbon.OnlyAttachmentsButton.Checked;
 
 			// Early out when we don't need to sign/encrypt
-			if (!needToEncrypt && !needToSign)
-				return;
+            if (!needToEncrypt && !needToSign)
+                return;
 
 			// DEFAULT TO CANCEL
 			Cancel = true;
@@ -1843,21 +1837,12 @@ namespace OutlookPrivacyPlugin
                         else
                         {
                             bar.status_yellow("Message Partially Signed! User ID: " + Context.SignedByUserId + " Key ID: " + Context.SignedByKeyId);
-                            //mailItem.Body = unsigned_part + "\n\n-----Signed Message begins here-----\n" + mail;
                         }
                     }
                     else
                     {
                         MessageBox.Show("Valid Signature!", "Signature Validation", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    /*
-
-					if (mailType == Outlook.OlBodyFormat.olFormatPlain)
-					{
-                       
-						mailItem.Body = message + mailItem.Body;
-					}
-                     */
 				}
 				else
 				{
@@ -1870,12 +1855,6 @@ namespace OutlookPrivacyPlugin
                     {
                         MessageBox.Show("Invalid Signature!", "Signature Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-					/*var message = "** Invalid signature from \"" + Context.SignedByUserId +
-
-					if (mailType == Outlook.OlBodyFormat.olFormatPlain)
-					{
-						mailItem.Body = message + mailItem.Body;
-					}*/
 				}
 			}
 			catch (PublicKeyNotFoundException)
@@ -1890,13 +1869,6 @@ namespace OutlookPrivacyPlugin
                 {
                     MessageBox.Show("Unable to Verify! (Missing Public Key)", "Missing Public Key", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-				/*const string message = "** Unable to verify signature, missing public key.\n\n";
-
-				if (mailType == Outlook.OlBodyFormat.olFormatPlain)
-				{
-					mailItem.Body = message + mailItem.Body;
-				}*/
 			}
 			catch (Exception ex)
 			{
