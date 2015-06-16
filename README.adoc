@@ -4,19 +4,13 @@ A GnuPG/GPG/OpenPGP encryption plugin for Outlook 2010 and 2013.  Supports both 
 
 == About
 
+This plugin is a fork of the popular Outlook Privacy Plugin by Michael Eddington. It was forked in April 2015 as a students project.
+
 Outlook Privacy Plugin is a security extension for Outlook. It enables Outlook to send and receive email messages that are encrypted and/or signed with the OpenPGP standard. It uses your existing GnuPG/GPG keyrings.
-
-=== Status
-
-This plugin is fairly stable and is used daily by numerous people. We have just started translating into different languages. If your interested in contributing a translation for an unsupported language please see https://github.com/dejavusecurity/OutlookPrivacyPlugin/issues/27[issue #27].
-
-== Installation
-
-See the https://github.com/dejavusecurity/OutlookPrivacyPlugin/releases[releases] page for downloads and release notes.
 
 === 1. Download
 
-Download the latest release from the the https://github.com/dejavusecurity/OutlookPrivacyPlugin/releases[releases] page.
+Download the installer for the final version of the project at the https://github.com/GPGatHGB/OutlookPrivacyPlugin/releases[releases] page or the most up-to-date version by Michael Eddington https://github.com/dejavusecurity/OutlookPrivacyPlugin[here].
 
 === 2. Install Gpg4win
 
